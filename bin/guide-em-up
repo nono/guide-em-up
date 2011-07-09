@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "guide-em-up"
+require "goliath/runner"
+
+runner = Goliath::Runner.new(ARGV, nil)
+runner.app = GuideEmUp::Browser.new(Dir.pwd)
+runner.run
