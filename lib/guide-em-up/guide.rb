@@ -13,7 +13,7 @@ module GuideEmUp
     end
 
     def html
-      file = File.expand_path("../../../themes/github.erb", __FILE__)
+      file = File.expand_path("../../../data/themes/github.erb", __FILE__)
       tmpl = File.read(file)
       Erubis::Eruby.new(tmpl).result(to_hash)
     end
@@ -21,8 +21,7 @@ module GuideEmUp
   protected
 
     def to_hash
-      hsh = Hash[members.zip values].merge(:content => content)
-      hsh
+      Hash[members.zip values].merge(:content => content)
     end
 
     def content

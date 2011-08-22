@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description      = "Slide'em up is a tool for writing guides in markdown"
   s.summary          = "Slide'em up is a tool for writing guides in markdown and generates one-page HTML document from them"
   s.extra_rdoc_files = %w(README.md)
-  s.files            = Dir["MIT-LICENSE", "README.md", "Gemfile", "bin/*", "lib/**/*.rb", "themes/**/*"]
+  s.files            = Dir["MIT-LICENSE", "README.md", "Gemfile", "bin/*", "lib/**/*.rb", "data/**/*"]
   s.executables      = ["guide-em-up"]
   s.require_paths    = ["lib"]
   s.rubygems_version = %q{1.3.7}

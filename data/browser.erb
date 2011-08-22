@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Guide'em up - <%= dir %></title>
+    <link rel="shortcut icon" type="image/png" href="/guideemup/images/h5ai-16x16.png">
+    <link rel="stylesheet" type="text/css" href="/guideemup/css/browser.css">
+  </head>
+  <body>
+    <nav>
+      <span class="left">
+        <a href='/'><img src='/guideemup/images/home.png' alt='>' /></a>
+      </span>
+      <span class="right">
+        TODO select style here
+      </span>
+      <span class="center">
+        Guide'em up
+      </span>
+    </nav>
+
+    <section class="clearfix">
+      <ul>
+        <% files.each do |file| %>
+          <li class="entry">
+            <a href="<%= "#{file.path}" %>">
+              <span class="icon">
+                <img src="/guideemup/icons/<%= file.icon %>.png" />
+              </span>
+              <span class="label"><%= file.name %></span>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </body>
+</html>

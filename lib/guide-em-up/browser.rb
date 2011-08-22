@@ -18,6 +18,8 @@ module GuideEmUp
         unauthorized_access
       elsif File.directory?(path_info)
         serve_index(path_info)
+      elsif path_info =~ /\/guideemup\/(css|images|icons|js)\//
+        serve_data(path_info)
       else
         page_not_found(path_info)
       end
@@ -34,11 +36,24 @@ module GuideEmUp
     end
 
     def serve_index(path_info)
-      body = "TODO"
+      body = Index.new(@root, path_info).html
       [200, {
-        "Content-Length" => Rack::Utils.bytesize(body).to_s,
         "Content-Type"   => "text/html; charset=utf-8",
+        "Content-Length" => Rack::Utils.bytesize(body).to_s,
       }, [body] ]
+    end
+
+    def serve_data(path_info)
+      file = path_info.sub 'guideemup', 'data'
+      if File.exists?(file)
+        body = File.read(file)
+        [200, {
+          "Content-Type"   => Rack::Mime.mime_type(File.extname file),
+          "Content-Length" => Rack::Utils.bytesize(body).to_s,
+        }, [body] ]
+      else
+        page_not_found(path_info)
+      end
     end
 
     def page_not_found(path_info)

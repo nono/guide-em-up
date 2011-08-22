@@ -19,7 +19,6 @@ It's really simple:
 TODO
 ----
 
-* Browse files to find the guide
 * Let us choose between several themes
 * Complete specs
 
@@ -37,6 +36,9 @@ If you wants to make a pull request, please check the specs before:
 
 Credits
 -------
+
+The CSS and images for the browser are based on
+[h5ai](http://larsjung.de/h5ai/), a beautified Apache index.
 
 ♡2011 by Bruno Michel. Copying is an act of love. Please copy and share.
 Released under the MIT license
