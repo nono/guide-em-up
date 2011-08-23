@@ -6,15 +6,16 @@ require "yajl"
 
 
 module GuideEmUp
-  class Guide < Struct.new(:filename, :title)
-    def initialize(filename)
-      self.filename = self.title = filename
+  class Guide < Struct.new(:filename, :title, :template)
+    def initialize(filename, template)
+      self.filename = filename
+      self.title    = File.basename(filename)
+      self.template = template
       @codemap = {}
     end
 
     def html
-      file = File.expand_path("../../../data/themes/github.erb", __FILE__)
-      tmpl = File.read(file)
+      tmpl = File.read(template)
       Erubis::Eruby.new(tmpl).result(to_hash)
     end
 

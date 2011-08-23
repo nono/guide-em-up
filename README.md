@@ -16,13 +16,6 @@ It's really simple:
 4. Select your guide and enjoy :-)
 
 
-TODO
-----
-
-* Let us choose between several themes
-* Complete specs
-
-
 Issues or Suggestions
 ---------------------
 

@@ -19,10 +19,11 @@ body {
     font-family: Ubuntu, sans-serif;
     font-size: 16px;
     color: #555;
-    margin: 80px 30px;
+    margin: 100px 50px;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+h1 {
+    font-size: 1.4em;
+    margin: 5px;
 }
 a, a:active, a:visited {
     color: #607890;
@@ -79,6 +80,9 @@ section {
     border-radius: 15px 15px 15px 15px;
     padding: 3px;
 }
+section h1 {
+    padding: 5px 15px;
+}
 ul {
 	margin: 0;
 	padding: 0;
@@ -118,4 +122,32 @@ ul li.entry a .icon img, ul li.entry a:active .icon img, ul li.entry a:visited .
 ul li.entry a .label, ul li.entry a:active .label, ul li.entry a:visited .label {
     display: block;
     word-wrap: break-word;
+}
+
+aside {
+	display: block;
+	position: fixed;
+	left: 0;
+	top: 100px;
+	z-index: 1;
+	overflow: auto;
+	padding: 16px 16px 16px 16px;
+	background-color: #f1f1f1;
+	border: 2px solid #d2d2d2;
+	border-left: none;
+	-moz-border-radius: 0 15px 15px 0;
+	-webkit-border-radius: 0 15px 15px 0;
+	border-radius: 0 15px 15px 0;
+}
+aside li {
+    padding: 3px;
+}
+aside li.selected {
+	font-weight: bold;
+}
+aside li a {
+	text-decoration: none;
+}
+aside li img {
+    vertical-align: middle;
 }

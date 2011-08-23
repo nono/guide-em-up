@@ -2,29 +2,40 @@
 <html>
   <head>
     <title>Guide'em up - <%= dir %></title>
-    <link rel="shortcut icon" type="image/png" href="/guideemup/images/h5ai-16x16.png">
-    <link rel="stylesheet" type="text/css" href="/guideemup/css/browser.css">
+    <link rel="shortcut icon" type="image/png" href="/g-e-u/images/h5ai-16x16.png">
+    <link rel="stylesheet" type="text/css" href="/g-e-u/css/browser.css">
   </head>
   <body>
     <nav>
       <span class="left">
-        <a href='/'><img src='/guideemup/images/home.png' alt='>' /></a>
-      </span>
-      <span class="right">
-        TODO select style here
+        <a href='/'><img src='/g-e-u/images/home.png' alt='>' /></a>
       </span>
       <span class="center">
-        Guide'em up
+        <h1>Guide'em up</h1>
       </span>
     </nav>
 
+    <aside>
+      <h1>Thèmes</h1>
+      <ul>
+        <% themes.each do |theme| %>
+          <li class="theme<%= " selected" if theme.current %>">
+            <a href="/g-e-u/theme/<%= theme.name %>">
+              <img src="/g-e-u/images/tree.png" />
+              <%= theme.name %>
+            </a>
+          </li>
+        <% end %>
+    </aside>
+
     <section class="clearfix">
+    <h1><%= dir %></h1>
       <ul>
         <% files.each do |file| %>
           <li class="entry">
             <a href="<%= "#{file.path}" %>">
               <span class="icon">
-                <img src="/guideemup/icons/<%= file.icon %>.png" />
+                <img src="/g-e-u/icons/<%= file.icon %>.png" />
               </span>
               <span class="label"><%= file.name %></span>
             </a>

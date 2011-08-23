@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu&v2' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono&v2' rel='stylesheet' type='text/css'>
+    <style>
+      #container {
+        margin: 0 auto;
+        max-width: 920px;
+        background-color: #f8f8f8;
+        padding: .7em;
+        line-height: 25px;
+        font-size: 18px;
+        font-family: "Ubuntu", serif;
+        text-align: justify;
+        color: #282828;
+        border: 1px #E0E0E0 solid;
+      }
+
+      h1 { font-size: 42px; padding: 80px 0 20px; text-align: center; }
+      h2 { font-size: 32px; padding: 10px 0 80px; text-align: center; }
+      h3 { font-size: 24px; padding-top: 20px; border-top: 4px solid #E0E0E0; }
+      h4 { font-size: 18px; padding-top: 10px; }
+
+      code { font-size: 15px; line-height: 20px; font-family: "Droid Sans Mono", monospace; }
+    </style>
+
+    <title><%= title %></title>
+  </head>
+  <body>
+    <section id="container">
+      <header>
+        <h1><%= title %></h1>
+        <h2><%= Date.today.strftime "%d/%m/%Y" %></h2>
+      </header>
+      <article>
+        <%= content %>
+      </article>
+    </section>
+  </body>
+</html>
