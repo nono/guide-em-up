@@ -8,18 +8,21 @@ module GuideEmUp
   class Browser < Goliath::API
     def initialize(dir)
       @root = dir
+      @data = File.expand_path("../../../data", __FILE__)
     end
 
     def response(env)
-      path_info = File.join(@root, Rack::Utils.unescape(env["PATH_INFO"]))
-      if File.file?(path_info)
-        serve_guide(path_info)
-      elsif path_info.include? ".."
+      path_info = Rack::Utils.unescape(env["PATH_INFO"])
+      filename  = File.join(@root, path_info)
+      datafile  = File.join(@data, path_info)
+      if File.file?(filename)
+        serve_guide(filename)
+      elsif filename.include? ".."
         unauthorized_access
-      elsif File.directory?(path_info)
-        serve_index(path_info)
-      elsif path_info =~ /\/guideemup\/(css|images|icons|js)\//
-        serve_data(path_info)
+      elsif File.directory?(filename)
+        serve_index(filename)
+      elsif datafile =~ /\/guideemup\/(css|images|icons|js)\//
+        serve_data(datafile.sub 'guideemup', '')
       else
         page_not_found(path_info)
       end
@@ -36,23 +39,22 @@ module GuideEmUp
     end
 
     def serve_index(path_info)
-      body = Index.new(@root, path_info).html
+      body = Index.new(@root, path_info, @data).html
       [200, {
         "Content-Type"   => "text/html; charset=utf-8",
         "Content-Length" => Rack::Utils.bytesize(body).to_s,
       }, [body] ]
     end
 
-    def serve_data(path_info)
-      file = path_info.sub 'guideemup', 'data'
-      if File.exists?(file)
-        body = File.read(file)
+    def serve_data(filename)
+      if File.exists?(filename)
+        body = File.read(filename)
         [200, {
-          "Content-Type"   => Rack::Mime.mime_type(File.extname file),
+          "Content-Type"   => Rack::Mime.mime_type(File.extname filename),
           "Content-Length" => Rack::Utils.bytesize(body).to_s,
         }, [body] ]
       else
-        page_not_found(path_info)
+        page_not_found(filename)
       end
     end
 
