@@ -6,6 +6,8 @@
     <link href='http://fonts.googleapis.com/css?family=Ubuntu&v2' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono&v2' rel='stylesheet' type='text/css'>
     <style>
+      section, article { display: block; }
+
       #container {
         margin: 0 auto;
         max-width: 920px;
@@ -31,10 +33,7 @@
   </head>
   <body>
     <section id="container">
-      <header>
-        <h1><%= title %></h1>
-        <h2><%= Date.today.strftime "%d/%m/%Y" %></h2>
-      </header>
+      <h1><%= title %> &ndash; <%= Date.today.strftime "%d/%m/%Y" %></h1>
       <article>
         <%= content %>
       </article>

@@ -28,7 +28,8 @@ module GuideEmUp
     def content
       raw = File.read(filename)
       tmp = extract_code(raw)
-      red = Redcarpet.new(tmp, :autolink, :generate_toc, :smart, :strikethrough, :tables)
+      ext = [:autolink, :generate_toc, :no_intraemphasis, :smart, :strikethrough, :tables]
+      red = Redcarpet.new(tmp, *ext)
       process_code red.to_html
     end
 
