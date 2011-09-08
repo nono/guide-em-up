@@ -6,11 +6,12 @@ require "yajl"
 
 
 module GuideEmUp
-  class Guide < Struct.new(:filename, :title, :template)
+  class Guide < Struct.new(:filename, :directory, :title, :template)
     def initialize(filename, template)
-      self.filename = filename
-      self.title    = File.basename(filename)
-      self.template = template
+      self.filename  = filename
+      self.directory = File.dirname(filename)
+      self.title     = File.basename(filename)
+      self.template  = template
       @codemap = {}
     end
 
@@ -27,10 +28,18 @@ module GuideEmUp
 
     def content
       raw = File.read(filename)
-      tmp = extract_code(raw)
+      tmp = extract_code(insert_include raw, directory)
       ext = [:autolink, :generate_toc, :no_intraemphasis, :smart, :strikethrough, :tables]
       red = Redcarpet.new(tmp, *ext)
       process_code red.to_html
+    end
+
+    def insert_include(md, dir)
+      md.gsub(/!INCLUDE (\S+)/) do
+        file = File.join(dir, $1)
+        idir = File.dirname(file)
+        insert_include File.read(file), idir
+      end
     end
 
     # Code taken from gollum (http://github.com/github/gollum)
