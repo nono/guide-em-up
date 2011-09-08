@@ -6,13 +6,14 @@ require "yajl"
 
 
 module GuideEmUp
-  class Guide < Struct.new(:filename, :directory, :title, :template)
+  class Guide < Struct.new(:filename, :directory, :title, :content, :template)
     def initialize(filename, template)
+      @codemap = {}
       self.filename  = filename
       self.directory = File.dirname(filename)
       self.title     = File.basename(filename)
       self.template  = template
-      @codemap = {}
+      self.content   = get_content
     end
 
     def html
@@ -23,15 +24,23 @@ module GuideEmUp
   protected
 
     def to_hash
-      Hash[members.zip values].merge(:content => content)
+      Hash[members.zip values]
     end
 
-    def content
+    def get_content
       raw = File.read(filename)
       tmp = extract_code(insert_include raw, directory)
       ext = [:autolink, :generate_toc, :no_intraemphasis, :smart, :strikethrough, :tables]
       red = Redcarpet.new(tmp, *ext)
-      process_code red.to_html
+      cnt = process_code red.to_html
+      find_title cnt
+    end
+
+    def find_title(txt)
+      txt.sub(/\A<h1[^>]*>([^>]*)<\/h1>/m) do
+        self.title = $1
+        ""
+      end
     end
 
     def insert_include(md, dir)
