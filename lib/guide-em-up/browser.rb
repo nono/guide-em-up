@@ -18,7 +18,7 @@ module GuideEmUp
       filename  = File.join(@root, path_info)
       datafile  = File.join(@data, path_info)
       if File.file?(filename)
-        serve_guide(filename)
+        serve_file(filename)
       elsif filename.include? ".."
         unauthorized_access
       elsif File.directory?(filename)
@@ -34,6 +34,15 @@ module GuideEmUp
     end
 
   protected
+
+    def serve_file(filename)
+      mime = Rack::Mime.mime_type(File.extname filename)
+      if mime =~ /^(audio|image|video)\//
+        serve_data(filename, mime)
+      else
+        serve_guide(filename)
+      end
+    end
 
     def serve_guide(filename)
       body = Guide.new(filename, @theme.template).html
@@ -51,11 +60,12 @@ module GuideEmUp
       }, [body] ]
     end
 
-    def serve_data(filename)
+    def serve_data(filename, mime=nil)
       if File.exists?(filename)
-        body = File.read(filename)
+        body   = File.read(filename)
+        mime ||= Rack::Mime.mime_type(File.extname filename)
         [200, {
-          "Content-Type"   => Rack::Mime.mime_type(File.extname filename),
+          "Content-Type"   => mime,
           "Content-Length" => Rack::Utils.bytesize(body).to_s,
         }, [body] ]
       else

@@ -15,6 +15,9 @@ It's really simple:
 3. Launch `guide-em-up` and open http://localhost:9000 in your browser
 4. Select your guide and enjoy :-)
 
+You must also install [pygments](http://pygments.org/) if you want syntax
+highlighting.
+
 
 Issues or Suggestions
 ---------------------
