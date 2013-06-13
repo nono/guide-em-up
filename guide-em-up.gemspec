@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.homepage         = "http://github.com/nono/guide-em-up"
   s.authors          = "Bruno Michel"
   s.email            = "bruno.michel@af83.com"
-  s.description      = "Slide'em up is a tool for writing guides in markdown"
-  s.summary          = "Slide'em up is a tool for writing guides in markdown and generates one-page HTML document from them"
+  s.description      = "Guide'em up is a tool for writing guides in markdown"
+  s.summary          = "Guide'em up is a tool for writing guides in markdown and generates one-page HTML document from them"
   s.extra_rdoc_files = %w(README.md)
   s.files            = Dir["MIT-LICENSE", "README.md", "Gemfile", "bin/*", "lib/**/*.rb", "data/**/*"]
   s.executables      = ["guide-em-up"]
